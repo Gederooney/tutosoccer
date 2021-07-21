@@ -1,0 +1,6 @@
+{
+	"mongoURI": "mongodb+srv://Rony:Motdepasse96@cluster0.s9chg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+	"euro" : "",
+	"schedule" : "https://www.espn.com/soccer/fixtures/_/date/",
+	"scoresBoard": "https://www.espn.com/soccer/scoreboard/_/league/all/date/"
+}

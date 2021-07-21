@@ -1,0 +1,30 @@
+{
+	"name": "tutosoccer",
+	"version": "1.0.0",
+	"description": "This is an api for live soccer informations",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"app": "nodemon app.js",
+		"scrape": "node scraper.js",
+		"client": "npm start --prefix ../client",
+		"tutosoccer": "concurrently \"npm run app \" \"npm run client\""
+	},
+	"author": "Rony Gédéon Yebadokpo",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"cheerio": "^1.0.0-rc.10",
+		"concurrently": "^6.2.0",
+		"config": "^3.3.6",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"mongoose": "^5.12.14",
+		"node-sass": "^6.0.1",
+		"nodemon": "^2.0.7",
+		"puppeteer": "^10.0.0"
+	},
+	"devDependencies": {
+		"node-fecth": "0.0.1-security"
+	}
+}
