@@ -66,20 +66,27 @@ const ScoresBoard = () => {
 	};
 	//
 	return (
-		<div>
+		<div className="">
 			<BoardContext.Provider value={boards}>
-				<Header daysArray={daysArray} handleDateClick={handleDateClick} />
-				{loading ? (
-					<div className="loading">
-						<Loader />
+				<div className="container-fluid">
+					<div className="row">
+						<div className="col-lg-9">
+							<Header daysArray={daysArray} handleDateClick={handleDateClick} />
+							{loading ? (
+								<div className="loading">
+									<Loader />
+								</div>
+							) : (
+								""
+							)}
+							<div id="events">
+								{boards.map((board, index) => {
+									return <League board={board} key={"" + index} />;
+								})}
+							</div>
+						</div>
+						<div className="col-lg-3"></div>
 					</div>
-				) : (
-					""
-				)}
-				<div id="events">
-					{boards.map((board, index) => {
-						return <League board={board} key={"" + index} />;
-					})}
 				</div>
 			</BoardContext.Provider>
 		</div>

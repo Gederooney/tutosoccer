@@ -1,5 +1,5 @@
-const Scoreboard = require("../models/Scoresboard");
-const newBoard = require("../scraper/scoreBoard");
+const Scoreboard = require("../../models/Scoresboard");
+const newBoard = require("../../scraper/scoreBoard");
 
 exports.getBoard = async (req, res) => {
 	try {

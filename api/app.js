@@ -9,6 +9,7 @@ app.use(cors());
 connectDB();
 
 app.use("/api/scoreboard", require("./routes/clients/scoreboard"));
+app.use("/api/transfers", require("./routes/clients/transfers"));
 
 const PORT = process.env.PORT || 8001;
 

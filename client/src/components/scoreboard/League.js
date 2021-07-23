@@ -9,8 +9,8 @@ const League = (props) => {
 		<div className="league">
 			<p>
 				<a
-					className="date-heading"
-					href="/scoresboard"
+					className="league_name"
+					href="/"
 					dangerouslySetInnerHTML={{ __html: leagues[0].name }}></a>
 			</p>
 
@@ -18,7 +18,6 @@ const League = (props) => {
 				return (
 					<>
 						<Fixture event={event} key={index + ""} />
-						<div className="scoreboard-aside"></div>
 					</>
 				);
 			})}

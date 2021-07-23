@@ -1,6 +1,6 @@
 const config = require("config");
-const Schedule = require("../models/Schedule");
-const browserObject = require("../browser/browser");
+const Schedule = require("../../models/Schedule");
+const browserObject = require("../../browser/browser");
 
 exports.getSchedule = async (req, res) => {
 	const { year, month, day } = req.body;

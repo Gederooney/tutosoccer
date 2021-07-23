@@ -1,4 +1,5 @@
 import React from "react";
+import SoccerBall from "../../assets/images/SoccerBall";
 
 const Fixture = (props) => {
 	const competitions = props.event.competitions[0];
@@ -29,129 +30,194 @@ const Fixture = (props) => {
 		});
 	}
 	return (
-		<article className="scoreboard">
-			<div className="scoreboard__game">
-				<div className="game__team">
-					<div className="infos">
-						<div
-							className="infos__name"
+		<article className="conatiner-fluid d-flex flex-column mb-3">
+			<div className="row">
+				<div className="col row">
+					<div className="col-lg-7 d-flex flex-column justify-content-start align-items-end">
+						<span
+							className="team_name"
 							dangerouslySetInnerHTML={{
 								__html: home.team.displayName,
-							}}></div>
-						<div className="infos__record">
+							}}></span>
+						<small className="form">
 							{home.form ? "Form: " + home.form : ""}
-						</div>
+						</small>
 					</div>
-					<div className="logo">
-						<img
-							src={
-								home.team.logo
-									? home.team.logo
-									: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/default-team-logo-500.png"
-							}
-							alt={home.team.displayName + "logo"}
-						/>
-					</div>
-					<div className="score home">
+					<img
+						src={
+							home.team.logo
+								? home.team.logo
+								: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/default-team-logo-500.png"
+						}
+						alt={home.team.displayName + "logo"}
+						className="img-fluid logo col-lg-3"
+					/>
+
+					<span className="score col-lg-2 d-flex justify-content-center align-items-center">
 						{(!status.type.completed && status.type.state !== "in") ||
 						(status.type.completed && status.type.state !== "post")
 							? ""
 							: home.score}
-					</div>
+					</span>
 				</div>
-				<div className="game__infos">
-					{/* <span
-						className={
-							status.type.state === "in"
-								? "game__infos-state live"
-								: "game__infos-state"
-						}>
-						{status.type.state === "in"
-							? "Live"
-							: status.type.state === "post"
-							? "Finished"
-							: status.type.state === "pre" ? "Scheduled" : status.type.state}
-					</span> */}
-					<span
-						className={
-							status.type.state === "in"
-								? "game__infos-clock live"
-								: "game__infos-clock"
-						}
-						dangerouslySetInnerHTML={{ __html: status.type.detail }}></span>
-					{venue ? (
-						<>
-							<span
-								className="game__infos-stadium"
-								dangerouslySetInnerHTML={{ __html: venue.fullName }}></span>
-							<span className="game__infos-country">
+				<div className="col-lg-2 d-flex flex-column align-items-center align-content-center text-center">
+					{status.type.state === "pre" ? (
+						venue ? (
+							<>
+								{/* <small
+								dangerouslySetInnerHTML={{
+									__html: status.type.detail,
+								}}></small> */}
+								<small
+									dangerouslySetInnerHTML={{ __html: venue.fullName }}></small>
+								{/* <small>
 								{"(" + venue.address.city + ") "}
 								{venue.address.country ? venue.address.country : ""}
-							</span>
-						</>
+							</small> */}
+							</>
+						) : (
+							""
+						)
 					) : (
-						""
+						<>
+							<small
+								className={status.type.state === "in" ? "text-danger" : ""}>
+								{status.type.state === "in"
+									? "Live"
+									: status.type.state === "post"
+									? "Finished"
+									: status.type.state === "pre"
+									? "Scheduled"
+									: status.type.state}
+							</small>
+							<small
+								dangerouslySetInnerHTML={{
+									__html: status.type.detail,
+								}}></small>
+						</>
 					)}
+
+					{/*  */}
 				</div>
-				<div className="game__team">
-					<div className="score away">
+				<div className="col row">
+					<span className="score col-lg-2 d-flex justify-content-center align-items-center">
 						{(!status.type.completed && status.type.state !== "in") ||
 						(status.type.completed && status.type.state !== "post")
 							? ""
 							: away.score}
-					</div>
-					<div className="logo">
-						<img
-							src={
-								away.team.logo
-									? away.team.logo
-									: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/default-team-logo-500.png"
-							}
-							alt={away.team.displayName + "logo"}
-						/>
-					</div>
-					<div className="infos">
-						<div
-							className="infos__name"
+					</span>
+					<img
+						src={
+							away.team.logo
+								? away.team.logo
+								: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/default-team-logo-500.png"
+						}
+						alt={away.team.displayName + "logo"}
+						className="img-fluid logo col-lg-3"
+					/>
+					<div className="col-lg-7 d-flex flex-column justify-content-start align-items-start">
+						<span
+							className="team_name"
 							dangerouslySetInnerHTML={{
 								__html: away.team.displayName,
-							}}></div>
-						<div className="infos__record">
+							}}></span>
+						<small className="form">
 							{away.form ? "Form: " + away.form : ""}
-						</div>
+						</small>
 					</div>
 				</div>
 			</div>
-			<div className="scoreboard__details">
-				<div className="details__col">
-					{homeDetails.length
-						? homeDetails.map((detail, index) => {
-								return (
-									<span className="details__col-action" key={index}>
-										<span className="action__col">{detail.player_name}</span>
-										<span className="action__col">{detail.type}</span>
-										<span
-											className="action__col"
-											dangerouslySetInnerHTML={{ __html: detail.clock }}></span>
-									</span>
-								);
-						  })
-						: ""}
-				</div>
-				<div className="details__col">
-					{awayDetails.length
-						? awayDetails.map((detail, index) => {
-								return (
-									<span className="details__col-action" key={index}>
-										<span className="action__col">{detail.player_name}</span>
-										<span className="action__col">{detail.type}</span>
-										<span
-											className="action__col"
-											dangerouslySetInnerHTML={{ __html: detail.clock }}></span>
-									</span>
-								);
-						  })
-						: ""}
+			<div className="container-fluid">
+				<div className="row">
+					<div className="col-lg-5 row">
+						<div className="details text-muted d-flex flex-column align-items-end p-2">
+							{homeDetails.length
+								? homeDetails.map((detail, index) => {
+										return (
+											<span
+												className="details_container d-flex flex-row my-1 justify-content-end"
+												key={index}>
+												<span>{detail.player_name}</span>
+												<div
+													className={
+														detail.type === "Yellow Card"
+															? "gCard yellow mx-2"
+															: detail.type === "Red Card"
+															? "gCard red mx-2"
+															: "gCard mx-2"
+													}>
+													{detail.type === "Yellow Card" ||
+													detail.type === "Red Card" ? (
+														""
+													) : detail.type === "Goal" || "Goal - Header" ? (
+														<SoccerBall />
+													) : detail.type === "Own Goal" ? (
+														"OG"
+													) : detail.type === "Penalty - Scored" ? (
+														<>
+															P <SoccerBall />
+														</>
+													) : (
+														detail.type
+													)}
+												</div>
+
+												<span
+													className=""
+													dangerouslySetInnerHTML={{
+														__html: detail.clock,
+													}}></span>
+											</span>
+										);
+								  })
+								: ""}
+						</div>
+					</div>
+					<div className="col-lg-2"></div>
+					<div className="col-lg-5 row">
+						<div className="details text-muted d-flex flex-column align-items-start p-2">
+							{awayDetails.length
+								? awayDetails.map((detail, index) => {
+										return (
+											<span
+												className="details_container d-flex flex-row my-1"
+												key={index}>
+												<span
+													className=""
+													dangerouslySetInnerHTML={{
+														__html: detail.clock,
+													}}></span>
+												<div
+													className={
+														detail.type === "Yellow Card"
+															? "gCard yellow mx-2"
+															: detail.type === "Red Card"
+															? "gCard red mx-2"
+															: "gCard mx-2"
+													}>
+													{detail.type === "Yellow Card" ||
+													detail.type === "Red Card" ? (
+														""
+													) : detail.type === "Goal" || "Goal - Header" ? (
+														<SoccerBall />
+													) : detail.type === "Own Goal" ? (
+														"OG"
+													) : detail.type === "Penalty - Scored" ? (
+														<>
+															P <SoccerBall />
+														</>
+													) : (
+														detail.type
+													)}
+												</div>
+
+												<span>{detail.player_name}</span>
+											</span>
+										);
+								  })
+								: ""}
+						</div>
+					</div>
 				</div>
 			</div>
 		</article>
