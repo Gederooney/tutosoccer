@@ -22,5 +22,4 @@ exports.fecthTransfer = async () => {
 		transfers: JSON.parse(strippedData).page.content.transfers.transfers,
 		news: JSON.parse(strippedData).page.content.transfers.news,
 	};
-	// return JSON.parse(strippedData).page.content.transfers;
 };
