@@ -8,7 +8,8 @@
 		"app": "nodemon app.js",
 		"scrape": "node scraper.js",
 		"client": "npm start --prefix ../client",
-		"tutosoccer": "concurrently \"npm run app \" \"npm run client\""
+		"admin": "npm start --prefix ../admin",
+		"tutosoccer": "concurrently \"npm run app \" \"npm run client\" \"npm run admin\""
 	},
 	"author": "Rony Gédéon Yebadokpo",
 	"license": "MIT",

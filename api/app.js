@@ -8,8 +8,12 @@ app.use(cors());
 
 connectDB();
 
+//Clients endpoints
 app.use("/api/scoreboard", require("./routes/clients/scoreboard"));
 app.use("/api/transfers", require("./routes/clients/transfers"));
+
+//admin endpoints
+
 
 const PORT = process.env.PORT || 8001;
 

@@ -132,11 +132,11 @@ const Fixture = (props) => {
 					<div className="col-lg-5 row">
 						<div className="details text-muted d-flex flex-column align-items-end p-2">
 							{homeDetails.length
-								? homeDetails.map((detail, index) => {
+								? homeDetails.map((detail) => {
 										return (
 											<span
 												className="details_container d-flex flex-row my-1 justify-content-end"
-												key={index}>
+												key={detail.type + detail.clock}>
 												<span>{detail.player_name}</span>
 												<div
 													className={

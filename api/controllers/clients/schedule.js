@@ -1,48 +1,12 @@
-const config = require("config");
-const Schedule = require("../../models/Schedule");
-const browserObject = require("../../browser/browser");
+// const Scoreboard = require("../../models/Scoresboard");
+const newBoard = require("../../scraper/scoreBoard");
 
-exports.getSchedule = async (req, res) => {
-	const { year, month, day } = req.body;
-	let date = "" + year + month + day;
-	let schedule = Schedule.findOne({ date });
-	if (!schedule) return newSchedule(req, res);
-	res.json(schedule);
-};
-
-// get new schedule
-const newSchedule = async (req, res) => {
-	const { year, month, day } = req.body;
-	let date = "" + year + month + day;
-	comp = scrapeSchedule(date);
-	schedule = new Schedule({
-		date,
-		comp,
-	});
-	await schedule.save();
-	res.json(schedule);
-};
-
-// Scrape calendar
-exports.scrapeSchedule = async (date) => {
-	let browser;
-	
+exports.getBoard = async (req, res) => {
 	try {
-		browser = await browserObject.startBrowser();
-		
-		let page = await browser.newPage();
-		
-		await page.setViewport({
-			width: 1280,
-			height: 2920,
-			isMobile: false,
-		});
-		const url = config.get("schedule") + date;
-		await page.goto(url, {waitUntil: 'networkidle0'});
-		let competitions = await page.evaluate(() => {
-			let schedule = Array.from(document.querySelector("div#events").children);
-			console.log(0);
-		});
-		return competitions;
-	} catch (error) {}
+		board = await newBoard.fecthScoreboard(req.params.date);
+		res.json(board);
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send("Servor error");
+	}
 };

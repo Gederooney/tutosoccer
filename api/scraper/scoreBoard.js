@@ -29,7 +29,9 @@ exports.fecthScoreboard = async (date) => {
 		.replace(/;/g, "")
 		.split("window.espn.scoreboardSettings")[0]
 		.trim();
-	return JSON.parse(strippedData).scores;
+
+	if (JSON.parse(strippedData)) return JSON.parse(strippedData).scores;
+	return [];
 };
 
 exports.updateBoard = async (date) => {

@@ -1,10 +1,11 @@
 import React from "react";
 import Fixture from "./Fixture";
+import { sortEvents } from "../../utils/sortEvents";
 
 const League = (props) => {
 	const leagues = props.board.leagues;
 	const events = props.board.events;
-
+	sortEvents(events);
 	return (
 		<div className="league">
 			<p>
@@ -17,7 +18,10 @@ const League = (props) => {
 			{events.map((event, index) => {
 				return (
 					<>
-						<Fixture event={event} key={index + ""} />
+						<Fixture
+							event={event}
+							key={event.competitions[0].competitors[0].team.displayName}
+						/>
 					</>
 				);
 			})}

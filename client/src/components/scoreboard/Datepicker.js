@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../../css/datepicker.scss";
 import { ArrowLeft, ArrowRight } from "../../assets/images/Arrows";
+import Calendar from "./Calendar";
 
 const Datepicker = (props) => {
-	const { daysArray, handleDateClick } = props;
-	const [date, setDate] = useState();
+	const { setDate, daysArray, handleDateClick } = props;
+
 	const handleDateChange = (e) => {
-		setDate(e.target.value);
+		setDate(
+			new Date(
+				e.target.value.slice(5, 7) +
+					" " +
+					e.target.value.slice(8, 10) +
+					", " +
+					e.target.value.slice(0, 4)
+			).toISOString()
+		);
+		// setDate(e.target.value);
 	};
-	useEffect(() => {
-		// alert(date);
-	}, [date]);
+
 	return (
 		<div className="datepicker">
-			<div className="datepicker__header">
+			<div className="header">
 				{daysArray[0]
 					? daysArray[0].month +
 					  " " +
@@ -28,8 +36,10 @@ const Datepicker = (props) => {
 					  daysArray[6].year
 					: ""}
 			</div>
-			<div className="row">
-				<div className="col-1 col-1 border-1 rounded-circle d-flex flex-column justify-content-center align-items-center">
+			<div className="row body d-flex flex-row align-items-center">
+				<div
+					onClick={(e) => handleDateClick(2)}
+					className="arrow col-1 col-1 border-1 rounded-circle d-flex flex-column justify-content-center align-items-center">
 					<ArrowLeft />
 				</div>
 				{daysArray.map((d, index) => {
@@ -38,25 +48,25 @@ const Datepicker = (props) => {
 						<div
 							className={
 								index === 3
-									? "col-1 d-flex flex-column text-danger justify-content-center align-items-center"
-									: "col-1 d-flex flex-column justify-content-center align-items-center"
+									? "week col-1 d-flex flex-column text-danger justify-content-center align-items-center"
+									: "week col-1 d-flex flex-column justify-content-center align-items-center"
 							}
 							key={index}
 							onClick={(e) => handleDateClick(index)}>
-							<small className="datepicker__body_col-day">
-								{day.toUpperCase()}
-							</small>
-							<small className="datepicker__body_col-date">
+							<small className="day">{day.toUpperCase()}</small>
+							<small className="date">
 								{parseInt(date) < 10 ? date[1] : date}
 							</small>
 						</div>
 					);
 				})}
-				<div className="col-1 border-1 rounded-circle d-flex flex-column justify-content-center align-items-center">
+				<div
+					onClick={(e) => handleDateClick(4)}
+					className="arrow col-1 border-1 rounded-circle d-flex flex-column justify-content-center align-items-center">
 					<ArrowRight />
 				</div>
 				<div className="col-3">
-					<label>Select Date: </label>
+					<label>Select A Date: </label>
 					<input
 						type="date"
 						name="dateofbirth"
@@ -64,6 +74,7 @@ const Datepicker = (props) => {
 						onChange={(e) => handleDateChange(e)}
 					/>
 				</div>
+				<Calendar />
 			</div>
 		</div>
 	);

@@ -71,7 +71,11 @@ const ScoresBoard = () => {
 				<div className="container-fluid">
 					<div className="row">
 						<div className="col-lg-9">
-							<Header daysArray={daysArray} handleDateClick={handleDateClick} />
+							<Header
+								setDate={setDate}
+								daysArray={daysArray}
+								handleDateClick={handleDateClick}
+							/>
 							{loading ? (
 								<div className="loading">
 									<Loader />
@@ -80,9 +84,11 @@ const ScoresBoard = () => {
 								""
 							)}
 							<div id="events">
-								{boards.map((board, index) => {
-									return <League board={board} key={"" + index} />;
-								})}
+								{boards.length
+									? boards.map((board, index) => {
+											return <League board={board} key={"league" + index} />;
+									  })
+									: "No games on this day"}
 							</div>
 						</div>
 						<div className="col-lg-3"></div>
